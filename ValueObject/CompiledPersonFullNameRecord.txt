@@ -1,0 +1,118 @@
+﻿// ValueObjectSample.PersonFullNameRecord
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Text;
+using ValueObjectSample;
+
+public class PersonFullNameRecord : IEquatable<PersonFullNameRecord>
+{
+	private string _given;
+
+	private string _surname;
+
+	protected virtual Type EqualityContract
+	{
+		[System.Runtime.CompilerServices.NullableContext(1)]
+		[CompilerGenerated]
+		get
+		{
+			return typeof(PersonFullNameRecord);
+		}
+	}
+
+	public string Given => _given;
+
+	public string Surname => _surname;
+
+	public string FullName => _given + " " + _surname;
+
+	public string Reverse => _surname + ", " + _given;
+
+	public static PersonFullNameRecord Create(string given, string surname)
+	{
+		return new PersonFullNameRecord(given, surname);
+	}
+
+	private PersonFullNameRecord(string given, string surname)
+	{
+		_given = given;
+		_surname = surname;
+	}
+
+	public PersonFullNameRecord FamilyMemberWithSameSurname(string newGivenName)
+	{
+		return Create(newGivenName, _surname);
+	}
+
+	public override string ToString()
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.Append("PersonFullNameRecord");
+		stringBuilder.Append(" { ");
+		if (PrintMembers(stringBuilder))
+		{
+			stringBuilder.Append(" ");
+		}
+		stringBuilder.Append("}");
+		return stringBuilder.ToString();
+	}
+
+	protected virtual bool PrintMembers(StringBuilder builder)
+	{
+		builder.Append("Given");
+		builder.Append(" = ");
+		builder.Append((object?)Given);
+		builder.Append(", ");
+		builder.Append("Surname");
+		builder.Append(" = ");
+		builder.Append((object?)Surname);
+		builder.Append(", ");
+		builder.Append("FullName");
+		builder.Append(" = ");
+		builder.Append((object?)FullName);
+		builder.Append(", ");
+		builder.Append("Reverse");
+		builder.Append(" = ");
+		builder.Append((object?)Reverse);
+		return true;
+	}
+
+	[System.Runtime.CompilerServices.NullableContext(2)]
+	public static bool operator !=(PersonFullNameRecord? r1, PersonFullNameRecord? r2)
+	{
+		return !(r1 == r2);
+	}
+
+	[System.Runtime.CompilerServices.NullableContext(2)]
+	public static bool operator ==(PersonFullNameRecord? r1, PersonFullNameRecord? r2)
+	{
+		return (object)r1 == r2 || (r1?.Equals(r2) ?? false);
+	}
+
+	public override int GetHashCode()
+	{
+		return (EqualityComparer<Type>.Default.GetHashCode(EqualityContract) * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_given)) * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_surname);
+	}
+
+	public override bool Equals(object? obj)
+	{
+		return Equals(obj as PersonFullNameRecord);
+	}
+
+	public virtual bool Equals(PersonFullNameRecord? other)
+	{
+		return (object)other != null && EqualityContract == other!.EqualityContract && EqualityComparer<string>.Default.Equals(_given, other!._given) && EqualityComparer<string>.Default.Equals(_surname, other!._surname);
+	}
+
+	public virtual PersonFullNameRecord <Clone>$()
+	{
+		return new PersonFullNameRecord(this);
+	}
+
+	protected PersonFullNameRecord(PersonFullNameRecord original)
+	{
+		_given = original._given;
+		_surname = original._surname;
+	}
+}
