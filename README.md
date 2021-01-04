@@ -1,4 +1,4 @@
-# DOMAIN DRIVEN DESIGN IN C#: IMMUTABLE VALUE OBJECTS
+# Domain Driven Design in C#: Immutable Value Objects
 
 Sample solution to accompany Pluralsight blog post:  
 https://www.pluralsight.com/blog/software-development/domain-driven-design-csharp
